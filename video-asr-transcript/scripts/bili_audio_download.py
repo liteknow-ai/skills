@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 B站音频流下载脚本
-从B站视频下载音频流并转换为WAV格式（16kHz mono）
+=================
+从B站视频下载音频流并转换为WAV格式（16kHz mono）。
 
 用法：
     python bili_audio_download.py <BV号> [--output <输出目录>]
@@ -9,6 +10,10 @@ B站音频流下载脚本
 示例：
     python bili_audio_download.py BV1zvMu6UEYC
     python bili_audio_download.py BV1zvMu6UEYC --output /tmp/audio_work
+
+前置依赖：
+    如未安装依赖，先运行: python env_setup.py --fix
+    或手动安装: pip install imageio-ffmpeg
 """
 import sys
 import os

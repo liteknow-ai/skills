@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 抖音视频音频下载脚本
-
+=====================
 通过 iesdouyin 移动端页面提取视频流地址，下载无水印 MP4 并转换为 WAV 音频。
 
 原理：
@@ -20,8 +20,9 @@
     python douyin_audio_download.py 7657058079216848178
     python douyin_audio_download.py 7657058079216848178 --output-dir /tmp/douyin_work
 
-依赖：
-    pip install requests imageio-ffmpeg
+前置依赖：
+    如未安装依赖，先运行: python env_setup.py --fix
+    或手动安装: pip install requests imageio-ffmpeg
 """
 
 import argparse
@@ -32,8 +33,23 @@ import subprocess
 import sys
 from urllib.parse import unquote
 
-import requests
-import imageio_ffmpeg
+try:
+    import requests
+except ImportError:
+    sys.exit(
+        "错误: requests 未安装。\n"
+        "请运行: python scripts/env_setup.py --fix\n"
+        "或手动: pip install requests"
+    )
+
+try:
+    import imageio_ffmpeg
+except ImportError:
+    sys.exit(
+        "错误: imageio-ffmpeg 未安装。\n"
+        "请运行: python scripts/env_setup.py --fix\n"
+        "或手动: pip install imageio-ffmpeg"
+    )
 
 
 def get_video_data(video_id: str) -> dict:

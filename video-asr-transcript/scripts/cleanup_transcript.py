@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 ASR 转录文本清理脚本
-清理 Vosk 中文转录输出：去除逐词空格、修正常见ASR错误、段落分段
+=====================
+清理 Vosk 中文转录输出：去除逐词空格、修正常见ASR错误、段落分段。
 
 用法：
     python cleanup_transcript.py --input <原始转录文件> --output <清理后文件>

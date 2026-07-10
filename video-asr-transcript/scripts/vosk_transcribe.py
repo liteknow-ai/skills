@@ -1,7 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Vosk 离线语音识别转录脚本
-使用 Vosk + vosk-model-small-cn 对中文音频进行离线转录
+===========================
+使用 Vosk + vosk-model-small-cn 对中文音频进行离线转录。
 
 用法：
     python vosk_transcribe.py --audio <wav文件> --model <模型目录> [--output <输出文件>]
@@ -11,8 +12,12 @@ Vosk 离线语音识别转录脚本
 
 要求：
     - 音频格式：WAV, 16kHz, mono
-    - 依赖：vosk, wave (Python标准库)
-    - 模型：vosk-model-small-cn-0.22 (https://alphacephei.com/vosk/models/vosk-model-small-cn-0.22.zip)
+    - 模型：vosk-model-small-cn-0.22
+    - 前置依赖: python env_setup.py --fix
+
+Vosk 模型下载：
+    https://alphacephei.com/vosk/models/vosk-model-small-cn-0.22.zip
+    或使用 --download-model 自动下载
 """
 import argparse
 import json
@@ -63,7 +68,14 @@ def download_model(model_dir: str, work_dir: str):
 
 def transcribe(wav_path: str, model_dir: str, out_txt: str, out_srt: str = None):
     """使用Vosk转录音频"""
-    from vosk import Model, KaldiRecognizer
+    try:
+        from vosk import Model, KaldiRecognizer
+    except ImportError:
+        sys.exit(
+            "错误: vosk 未安装。\n"
+            "请运行: python scripts/env_setup.py --fix\n"
+            "或手动: pip install vosk"
+        )
 
     # Load model
     print(f"Loading Vosk model: {model_dir}")
